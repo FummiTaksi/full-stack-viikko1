@@ -58,7 +58,6 @@ const Otsikko = (props) => {
 
     return (
       <div>
-        <Hello name="Arto" age={36} />
         <Otsikko teksti = {kurssi.nimi} />
         <Sisalto osat = {kurssi.osat} />
         <Yhteensa yhteensa = {yhteensa} />
