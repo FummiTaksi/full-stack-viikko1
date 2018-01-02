@@ -31,28 +31,29 @@ const Otsikko = (props) => {
       return <p>yhteensä {summa} tehtävää</p>
   }
   
-  const lisaaOsaListaan = (lista, nimi, tehtavat) => {
-      lista.push({nimi: nimi, tehtavaMaara: tehtavat});
-  }
-  
   const App = () => {
+
     const kurssi = 'Half Stack -sovelluskehitys'
-    const elementit = [];
-    const osa1 = 'Reactin perusteet'
-    const tehtavia1 = 10
-    lisaaOsaListaan(elementit, osa1, tehtavia1);
-    const osa2 = 'Tiedonvälitys propseilla'
-    const tehtavia2 = 7
-    lisaaOsaListaan(elementit, osa2 , tehtavia2);
-    const osa3 = 'Komponenttien tila'
-    const tehtavia3 = 14
-    lisaaOsaListaan(elementit, osa3 , tehtavia3);
-  
+    const osat = [
+      {
+        nimi: 'Reactin perusteet',
+        tehtavaMaara: 10,
+      },
+      {
+        nimi: 'Tiedonvälitys propseilla',
+        tehtavaMaara: 7
+      },
+      {
+        nimi: 'Komponenttien tila',
+        tehtavaMaara: 14
+      }
+    ]
+
     return (
       <div>
-        <Otsikko teksti = 'Half Stack -sovelluskehitys' />
-        <Sisalto osat = {elementit} />
-        <Yhteensa osat = {elementit} />
+        <Otsikko teksti = {kurssi} />
+        <Sisalto osat = {osat} />
+        <Yhteensa osat = {osat} />
       </div>
     )
   }
