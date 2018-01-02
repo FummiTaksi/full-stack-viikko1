@@ -17,7 +17,7 @@ const Otsikko = (props) => {
   const Sisalto = (props) => {
       let elementit = [];
       props.osat.forEach((osa) => {
-        elementit.push(<Osa osa = {osa} />);
+        elementit.push(<Osa key = { osa.nimi } osa = {osa} />);
       })
       return elementit;
   }
