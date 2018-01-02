@@ -16,18 +16,17 @@ const Otsikko = (props) => {
   
   const Sisalto = (props) => {
       let elementit = [];
-      for (let i = 0; i < props.osat.length; i++) {
-          elementit.push(<Osa osa = {props.osat[i]} />);
-      }
+      props.osat.forEach((osa) => {
+        elementit.push(<Osa osa = {osa} />);
+      })
       return elementit;
   }
   
   const Yhteensa = (props) => {
-      var summa = 0;
-      for (let i = 0; i < props.osat.length; i++) {
-          let osa = props.osat[i];
-          summa += osa.tehtavaMaara;
-      }
+      let summa = 0;
+      props.osat.forEach((osa) => {
+          summa += osa.tehtavaMaara
+      })
       return <p>yhteensä {summa} tehtävää</p>
   }
   
