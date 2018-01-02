@@ -23,11 +23,15 @@ const Otsikko = (props) => {
   }
   
   const Yhteensa = (props) => {
-      let summa = 0;
-      props.osat.forEach((osa) => {
-          summa += osa.tehtavaMaara
-      })
-      return <p>yhteensä {summa} tehtävää</p>
+      return <p>yhteensä {props.yhteensa} tehtävää</p>
+  }
+
+  const laskeSumma = (osat) => {
+    let summa = 0;
+    osat.forEach((osa) => {
+        summa += osa.tehtavaMaara
+    })
+    return summa;
   }
   
   const App = () => {
@@ -50,12 +54,14 @@ const Otsikko = (props) => {
       ]
     }
 
+    const yhteensa = laskeSumma(kurssi.osat);
 
     return (
       <div>
+        <Hello name="Arto" age={36} />
         <Otsikko teksti = {kurssi.nimi} />
         <Sisalto osat = {kurssi.osat} />
-        <Yhteensa osat = {kurssi.osat} />
+        <Yhteensa yhteensa = {yhteensa} />
       </div>
     )
   }
