@@ -1,5 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import KurssiKokoelma from './kurssi/KurssiKokoelma'
+import Puhelinluettelo from './puhelinluettelo/Puhelinluettelo'
 
-ReactDOM.render(<KurssiKokoelma/>, document.getElementById('root'))
+ReactDOM.render(<Puhelinluettelo/> , document.getElementById('root'))
