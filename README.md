@@ -2,3 +2,6 @@
 
 [Linkki tehtäviin 12-17](https://github.com/FummiTaksi/unicafe/blob/master/src/index.js)
 
+[Linkki tehtäviin 18-20](https://github.com/FummiTaksi/anecdote-app/blob/master/src/index.js)
+
+
