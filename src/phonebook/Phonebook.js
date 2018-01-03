@@ -16,14 +16,30 @@ class Phonebook extends React.Component {
   
 
 
+    typedNameIsInTheList = () => {
+      const person = this.state.persons.find((person) => {
+        return person.name === this.state.newName
+      })
+       return person;
+    }
+
     addPerson = (e) => {
         e.preventDefault();
-        const newPerson = {name: this.state.newName}
-        const persons = this.state.persons.concat(newPerson);
-        this.setState({
-            persons: persons,
+        const person = this.typedNameIsInTheList();
+        if (person) {
+          window.alert(person.name  + " is already in the list!");
+          this.setState({
             newName: ''
-        })
+          })
+        }
+        else {
+          const newPerson = {name: this.state.newName}
+          const persons = this.state.persons.concat(newPerson);
+          this.setState({
+              persons: persons,
+              newName: ''
+          })
+        }
     }
 
     handleNameChange = (e) => {
