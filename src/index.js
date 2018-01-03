@@ -1,5 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Puhelinluettelo from './puhelinluettelo/Puhelinluettelo'
+import Phonebook from './phonebook/Phonebook'
 
-ReactDOM.render(<Puhelinluettelo/> , document.getElementById('root'))
+ReactDOM.render(<Phonebook/> , document.getElementById('root'))
