@@ -1,5 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Kurssi from './kurssi/Kurssi'
+import KurssiKokoelma from './kurssi/KurssiKokoelma'
 
-ReactDOM.render(<Kurssi />, document.getElementById('root'))
+ReactDOM.render(<KurssiKokoelma/>, document.getElementById('root'))

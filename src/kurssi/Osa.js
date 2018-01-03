@@ -5,7 +5,7 @@ class Osa extends React.Component {
     
         render() {
             return (
-                <p>{this.props.osa.nimi} {this.props.osa.tehtavaMaara}</p>
+                <li>{this.props.osa.nimi}, tehtäviä {this.props.osa.tehtavia}</li>
             )
         }
     }

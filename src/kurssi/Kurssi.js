@@ -8,40 +8,18 @@ import Yhteensa from './Yhteensa'
 
 const laskeSumma = (osat) => {
     return osat.reduce(function (summa, osa) {
-        return summa + osa.tehtavaMaara;
+        return summa + osa.tehtavia;
     }, 0)
   }
-
-  const kurssi = {
-    nimi: 'Half Stack -sovelluskehitys',
-    id: 1,
-    osat : [
-     {
-       nimi: 'Reactin perusteet',
-       tehtavaMaara: 10,
-       id: 1
-     },
-     {
-       nimi: 'Tiedonvälitys propseilla',
-       tehtavaMaara: 7,
-       id: 2
-     },
-     {
-       nimi: 'Komponenttien tila',
-       tehtavaMaara: 14,
-       id: 3
-     }
-   ]
- }
 
   class Kurssi extends React.Component {
 
         render() {
-            const yhteensa = laskeSumma(kurssi.osat);
+            const yhteensa = laskeSumma(this.props.kurssi.osat);
             return (
                 <div>
-                  <Otsikko teksti = {kurssi.nimi} />
-                  <Sisalto osat = {kurssi.osat} />
+                  <Otsikko teksti = {this.props.kurssi.nimi} />
+                  <Sisalto osat = {this.props.kurssi.osat} />
                   <Yhteensa yhteensa = {yhteensa} />
                 </div>
               )
