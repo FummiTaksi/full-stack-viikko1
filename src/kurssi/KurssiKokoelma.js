@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Kurssi from './Kurssi'
 
 const kurssit = [
@@ -46,7 +45,7 @@ class KurssiKokoelma extends React.Component {
 
     render() {
         return kurssit.map((kurssi) => {
-            return <Kurssi kurssi = {kurssi} />
+            return <Kurssi key = {kurssi.id} kurssi = {kurssi} />
         })
     }
 }

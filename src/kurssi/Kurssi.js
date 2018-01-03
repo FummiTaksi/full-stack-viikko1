@@ -1,7 +1,5 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Otsikko from './Otsikko'
-import Osa from './Osa'
 import Sisalto from './Sisalto'
 import Yhteensa from './Yhteensa'
 

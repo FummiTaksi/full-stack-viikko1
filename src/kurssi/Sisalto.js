@@ -1,5 +1,4 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Osa from './Osa'
 
 class Sisalto extends React.Component {
@@ -11,8 +10,7 @@ class Sisalto extends React.Component {
         })
     }
 
-    render() {
-       
+    render() {     
         return (
             <div>
                 <h3>Sisältö:</h3>
