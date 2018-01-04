@@ -12,7 +12,6 @@ const create = (newObject) => {
 
 const deletePerson = (personId) => {
     const url = baseUrl + '/' + personId
-    console.log("URL",url);
     return axios.delete(url);
 }
 
