@@ -39,11 +39,13 @@ class CountryList extends React.Component {
 
     componentWillReceiveProps(nextProps) {
         if (this.state.selectedCountry) {
-            if (!this.filterContainsInName(nextProps.filter, this.state.selectedCountry.name)) {
+            if (!nextProps.filter || !this.filterContainsInName(nextProps.filter, this.state.selectedCountry.name)) {
                 this.setState({selectedCountry: undefined});
             }
         }
       }
+
+
 
     setSelectedCountry = (country) => {
         this.setState({selectedCountry: country});
@@ -51,6 +53,9 @@ class CountryList extends React.Component {
 
     render() {
         const countries = this.getFilteredCountryList();
+        if (this.state.selectedCountry) {
+            return <Country country = {this.state.selectedCountry} />
+        }
         if (countries.length === 1) {
             const country = countries[0];
             return (
@@ -61,9 +66,6 @@ class CountryList extends React.Component {
             return (
                 <p>too many matches,specify another filter</p>
             )
-        }
-        if (this.state.selectedCountry) {
-            return <Country country = {this.state.selectedCountry} />
         }
         return (
              <ul>
