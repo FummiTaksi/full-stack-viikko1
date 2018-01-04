@@ -7,7 +7,13 @@ const getAll = () => {
   }
   
 const create = (newObject) => {
-    return axios.get(baseUrl);
+    return axios.post(baseUrl, newObject);
 }
 
- export default { getAll, create }
+const deletePerson = (personId) => {
+    const url = baseUrl + '/' + personId
+    console.log("URL",url);
+    return axios.delete(url);
+}
+
+ export default { getAll, create, deletePerson }
