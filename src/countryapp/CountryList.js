@@ -7,7 +7,7 @@ class CountryList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            countries: []
+            allCountries: []
         }
     }
 
@@ -17,33 +17,39 @@ class CountryList extends React.Component {
         return nameLowCase === filterLowCase;
     }
 
-    getFilteredCountryList = (allCountries) => {
-        return allCountries.filter((country) => {
+    getFilteredCountryList = () => {
+        return this.state.allCountries.filter((country) => {
             return this.filterContainsInName(this.props.filter, country.name);
         })
     }
-
-    updateCountries() {
-        axios.get("https://restcountries.eu/rest/v2/all").then((response) => {
-            const allCountries = response.data;
-            this.setState({
-                countries: this.getFilteredCountryList(allCountries)
-            });
-        });
-    }
-
-    makeCountryList() {
-        this.updateCountries();
-        return this.state.countries.map((country) => {
-            return <Country country = {country} />
+    makeCountryList(countries) {
+        return countries.map((country) => {
+            return <li key = {country.name}>{country.name}</li>
         })
     }
 
+    componentWillMount() {
+        axios.get("https://restcountries.eu/rest/v2/all").then((response) => {
+            this.setState({allCountries: response.data})
+        });
+    }
+
     render() {
-        const countries = this.makeCountryList();
+        const countries = this.getFilteredCountryList();
+        if (countries.length === 1) {
+            const country = countries[0];
+            return (
+                <Country country = {country} />
+            )
+        }
+        if (countries.length > 10 ) {
+            return (
+                <p>too many matches,specify another filter</p>
+            )
+        }
         return (
              <ul>
-                 {this.makeCountryList()}
+                 {this.makeCountryList(countries)}
              </ul>
         )
     }
