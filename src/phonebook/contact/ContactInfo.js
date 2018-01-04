@@ -8,7 +8,7 @@ class ContactInfo extends React.Component {
           <div>
             <li key = {this.props.person.name}>
                 {this.props.person.name} {this.props.person.number} 
-                <button onClick = {() => this.props.onClick(this.props.person.id)}>Poista</button>
+                <button onClick = {() => this.props.onClick(this.props.person)}>Poista</button>
             </li>
            
           </div>

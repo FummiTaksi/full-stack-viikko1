@@ -59,9 +59,9 @@ class Phonebook extends React.Component {
         }
     }
 
-    deletePerson = (id) => {
-      if (window.confirm("Haluatko varmasti poistaa henkilön tiedot?")) {
-        personService.deletePerson(id).then((response) => {}).then(() => {
+    deletePerson = (person) => {
+      if (window.confirm("Haluatko varmasti poistaa henkilön " + person.name + " tiedot?")) {
+          personService.deletePerson(person.id).then((response) => {}).then(() => {
           this.setPersons();
         })
       }
