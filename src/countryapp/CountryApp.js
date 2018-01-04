@@ -1,5 +1,6 @@
 import React from 'react'
 import InputField from '../components/input/InputField'
+import CountryList from './CountryList'
 
 class CountryApp extends React.Component {
 
@@ -11,9 +12,8 @@ class CountryApp extends React.Component {
     }
 
     changeFilter = (e) => {
-        this.setState({filter: e.event.target.value});
+        this.setState({filter: e.target.value});
     }
-
 
     render() {
         return (
@@ -21,8 +21,9 @@ class CountryApp extends React.Component {
                 <InputField 
                     nameOfField = "find countries"
                     value = {this.state.filter}
-                    onChange = {this.changeFilter}
+                    changeFunction = {this.changeFilter}
                 />
+                <CountryList filter = {this.state.filter}/>
             </div>    
         )
     }
