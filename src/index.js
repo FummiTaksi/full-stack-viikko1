@@ -1,5 +1,5 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Phonebook from './phonebook/Phonebook'
+import CountryApp from './countryapp/CountryApp'
 
-ReactDOM.render(<Phonebook/> , document.getElementById('root'))
+ReactDOM.render(<CountryApp/> , document.getElementById('root'))
