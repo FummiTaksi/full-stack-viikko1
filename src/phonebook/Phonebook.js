@@ -2,7 +2,7 @@ import React from 'react'
 import ContactList from './contact/ContactList'
 import ContactForm from './contact/ContactForm'
 import InputField from '../components/input/InputField'
-import axios from 'axios'
+import personService from "../services/persons"
 
 class Phonebook extends React.Component {
 
@@ -18,8 +18,7 @@ class Phonebook extends React.Component {
   
 
     componentWillMount = () => {
-      axios.get('http://localhost:3001/persons')
-      .then(response => {
+      personService.getAll().then(response => {
         this.setState({ persons: response.data })
       })
     }
@@ -36,7 +35,7 @@ class Phonebook extends React.Component {
         name: this.state.newName,
         number: this.state.newNumber
       }
-      axios.post("http://localhost:3001/persons", newPerson).then((response) => {
+      personService.create(newPerson).then((response) => {
         this.setState({
           persons: this.state.persons.concat(response.data),
           newName: '',
