@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios'
 
 class Country extends React.Component {
 
@@ -16,7 +15,7 @@ class Country extends React.Component {
                 <h1>{this.props.country.name}</h1>
                 <p>capital: {this.props.country.capital}</p>
                 <p>population: {this.props.country.population} </p>
-                <img src = {this.props.country.flag} height="50" width="100"/>
+                <img src = {this.props.country.flag} height="50" width="100" alt =""/>
             </div>
         )
     }

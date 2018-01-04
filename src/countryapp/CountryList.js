@@ -7,7 +7,8 @@ class CountryList extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            allCountries: []
+            allCountries: [],
+            selectedCountry: undefined
         }
     }
 
@@ -24,7 +25,9 @@ class CountryList extends React.Component {
     }
     makeCountryList(countries) {
         return countries.map((country) => {
-            return <li key = {country.name}>{country.name}</li>
+            return <li key = {country.name} onClick = {() => this.setSelectedCountry(country)} >
+                        {country.name}
+                    </li>
         })
     }
 
@@ -32,6 +35,18 @@ class CountryList extends React.Component {
         axios.get("https://restcountries.eu/rest/v2/all").then((response) => {
             this.setState({allCountries: response.data})
         });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.state.selectedCountry) {
+            if (!this.filterContainsInName(nextProps.filter, this.state.selectedCountry.name)) {
+                this.setState({selectedCountry: undefined});
+            }
+        }
+      }
+
+    setSelectedCountry = (country) => {
+        this.setState({selectedCountry: country});
     }
 
     render() {
@@ -46,6 +61,9 @@ class CountryList extends React.Component {
             return (
                 <p>too many matches,specify another filter</p>
             )
+        }
+        if (this.state.selectedCountry) {
+            return <Country country = {this.state.selectedCountry} />
         }
         return (
              <ul>
