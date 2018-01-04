@@ -1,5 +1,5 @@
 import React from 'react'
-import InputField from './InputField'
+import InputField from '../../components/input/InputField'
 
 class FieldGroup extends React.Component {
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import ContactList from './contact/ContactList'
 import ContactForm from './contact/ContactForm'
-import InputField from './input/InputField'
+import InputField from '../components/input/InputField'
 import axios from 'axios'
 
 class Phonebook extends React.Component {
