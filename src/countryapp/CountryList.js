@@ -40,7 +40,7 @@ class CountryList extends React.Component {
     componentWillReceiveProps(nextProps) {
         if (this.state.selectedCountry) {
             if (!nextProps.filter || !this.filterContainsInName(nextProps.filter, this.state.selectedCountry.name)) {
-                this.setState({selectedCountry: undefined});
+                this.setSelectedCountry(undefined);
             }
         }
       }
