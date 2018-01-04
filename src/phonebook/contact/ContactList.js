@@ -16,7 +16,11 @@ class ContactList extends React.Component {
         })
 
         const persons = filteredPersons.map((person) => {
-            return <ContactInfo key = {person.name} person = {person} />
+            return <ContactInfo 
+                        key = {person.id} 
+                        person = {person} 
+                        onClick = {this.props.deleteFunction}
+                    />
         })
 
         return (

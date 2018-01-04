@@ -17,10 +17,14 @@ class Phonebook extends React.Component {
     }
   
 
-    componentWillMount = () => {
+    setPersons = () => {
       personService.getAll().then(response => {
         this.setState({ persons: response.data })
       })
+    }
+
+    componentWillMount = () => {
+      this.setPersons();
     }
 
     typedNameIsInTheList = () => {
@@ -53,6 +57,15 @@ class Phonebook extends React.Component {
         else {
           this.addPersonToListAndResetFields();
         }
+    }
+
+    deletePerson = (id) => {
+      if (window.confirm("Haluatko varmasti poistaa henkilön tiedot?")) {
+        personService.deletePerson(id).then((response) => {}).then(() => {
+          this.setPersons();
+        })
+      }
+
     }
 
     handleNameChange = (e) => {
@@ -99,6 +112,7 @@ class Phonebook extends React.Component {
           <ContactList 
             persons = {this.state.persons}
             filter = {this.state.filter}
+            deleteFunction = {this.deletePerson}
           /> 
         </div>
       )
