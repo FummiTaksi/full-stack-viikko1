@@ -54,6 +54,10 @@ class Phonebook extends React.Component {
         if (person) {
           person.number = this.state.newNumber;
           personService.editPerson(person).then((response) => {
+            this.setState({
+              newName: '',
+              newNumber: ''
+            })
             this.setPersons();
           })
         }
