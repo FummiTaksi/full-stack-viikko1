@@ -52,7 +52,10 @@ class Phonebook extends React.Component {
         e.preventDefault();
         const person = this.typedNameIsInTheList();
         if (person) {
-          window.alert(person.name  + " is already in the list!");
+          person.number = this.state.newNumber;
+          personService.editPerson(person).then((response) => {
+            this.setPersons();
+          })
         }
         else {
           this.addPersonToListAndResetFields();

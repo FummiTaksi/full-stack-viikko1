@@ -11,11 +11,12 @@ class ContactList extends React.Component {
     }
 
     render() {
+        const byId = (person1, person2) => person1.id - person2.id
         const filteredPersons = this.props.persons.filter((person) => {
             return this.filterContainsInName(this.props.filter, person.name);
         })
 
-        const persons = filteredPersons.map((person) => {
+        const persons = filteredPersons.sort(byId).map((person) => {
             return <ContactInfo 
                         key = {person.id} 
                         person = {person} 
