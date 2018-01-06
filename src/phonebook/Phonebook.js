@@ -107,7 +107,7 @@ class Phonebook extends React.Component {
             changeFunction = {this.handleFilterChange}
           />
           <br/>
-          <h3>Lisää uusi kontakti</h3>
+          <h3>Lisää uusi kontakti tai muuta olemassa olevaa</h3>
           <ContactForm formObject = {formObject}/>    
           <ContactList 
             persons = {this.state.persons}
