@@ -36,19 +36,24 @@ class Phonebook extends React.Component {
        return person;
     }
 
-    addPersonToListAndResetFields = () => {
-      const newPerson = {
-        name: this.state.newName,
-        number: this.state.newNumber
-      }
-      personService.create(newPerson).then((response) => {
+    addPersonToListAndResetFields = (person) => {
+      personService.create(person).then((response) => {
         this.setState({
           persons: this.state.persons.concat(response.data),
           newName: '',
           newNumber: ''
         })
       })
-      this.alterNotification(newPerson.name + " was added to contacts succesfully!");
+      this.alterNotification(person.name + " was added to contacts succesfully!");
+    }
+
+    findPersonsIndex = (person) => {
+      for (let i = 0; i < this.state.persons.length; i++) {
+        if (person.name === this.state.persons[i].name) {
+          return i;
+        }
+      }
+      return -1;
     }
 
     addPerson = (e) => {
@@ -65,10 +70,19 @@ class Phonebook extends React.Component {
             this.setPersons();
             this.alterNotification(person.name + "'s number was changed from " +
                                    oldNumber + " to " + person.number);
-          })
+          }).catch((error) => {
+            const index = this.findPersonsIndex(person);
+            const copyList = this.state.persons.slice();
+            copyList.splice(index, 1);
+            this.setState({
+              persons: copyList
+            })
+            this.addPersonToListAndResetFields(person);
+        })
         }
         else {
-          this.addPersonToListAndResetFields();
+          const person = {name: this.state.newName, number: this.state.newNumber}
+          this.addPersonToListAndResetFields(person);
         }
     }
 
