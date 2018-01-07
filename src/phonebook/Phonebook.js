@@ -81,8 +81,8 @@ class Phonebook extends React.Component {
         })
         }
         else {
-          const person = {name: this.state.newName, number: this.state.newNumber}
-          this.addPersonToListAndResetFields(person);
+          const newPerson = {name: this.state.newName, number: this.state.newNumber}
+          this.addPersonToListAndResetFields(newPerson);
         }
     }
 
