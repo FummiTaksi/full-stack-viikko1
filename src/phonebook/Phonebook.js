@@ -56,29 +56,34 @@ class Phonebook extends React.Component {
       return -1;
     }
 
-    addPerson = (e) => {
+
+    editPerson = (person) => {
+      const oldNumber = person.number;
+      person.number = this.state.newNumber;
+      personService.editPerson(person).then((response) => {
+        this.setState({
+          newName: '',
+          newNumber: ''
+        })
+        this.setPersons();
+        this.alterNotification(person.name + "'s number was changed from " +
+                               oldNumber + " to " + person.number);
+      }).catch((error) => {
+        const index = this.findPersonsIndex(person);
+        const copyList = this.state.persons.slice();
+        copyList.splice(index, 1);
+        this.setState({
+          persons: copyList
+        })
+        this.addPersonToListAndResetFields(person);
+    })
+    }
+
+    submitPerson = (e) => {
         e.preventDefault();
         const person = this.typedNameIsInTheList();
         if (person) {
-          const oldNumber = person.number;
-          person.number = this.state.newNumber;
-          personService.editPerson(person).then((response) => {
-            this.setState({
-              newName: '',
-              newNumber: ''
-            })
-            this.setPersons();
-            this.alterNotification(person.name + "'s number was changed from " +
-                                   oldNumber + " to " + person.number);
-          }).catch((error) => {
-            const index = this.findPersonsIndex(person);
-            const copyList = this.state.persons.slice();
-            copyList.splice(index, 1);
-            this.setState({
-              persons: copyList
-            })
-            this.addPersonToListAndResetFields(person);
-        })
+          this.editPerson(person);
         }
         else {
           const newPerson = {name: this.state.newName, number: this.state.newNumber}
@@ -131,7 +136,7 @@ class Phonebook extends React.Component {
       }
       const inputObjects = [name, number];
       const formObject = {
-        addFunction: this.addPerson, 
+        submitFunction: this.submitPerson, 
         inputObjects: inputObjects
       };
 
