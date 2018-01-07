@@ -3,6 +3,7 @@ import ContactList from './contact/ContactList'
 import ContactForm from './contact/ContactForm'
 import InputField from '../components/input/InputField'
 import personService from "../services/persons"
+import Notification from "../components/notification/Notification"
 
 class Phonebook extends React.Component {
 
@@ -12,7 +13,8 @@ class Phonebook extends React.Component {
         persons: [],
         newName: '',
         newNumber: '',
-        filter: ''
+        filter: '',
+        notificationMessage: null
       }
     }
   
@@ -46,12 +48,14 @@ class Phonebook extends React.Component {
           newNumber: ''
         })
       })
+      this.alterNotification(newPerson.name + " was added to contacts succesfully!");
     }
 
     addPerson = (e) => {
         e.preventDefault();
         const person = this.typedNameIsInTheList();
         if (person) {
+          const oldNumber = person.number;
           person.number = this.state.newNumber;
           personService.editPerson(person).then((response) => {
             this.setState({
@@ -59,6 +63,8 @@ class Phonebook extends React.Component {
               newNumber: ''
             })
             this.setPersons();
+            this.alterNotification(person.name + "'s number was changed from " +
+                                   oldNumber + " to " + person.number);
           })
         }
         else {
@@ -66,10 +72,20 @@ class Phonebook extends React.Component {
         }
     }
 
+    alterNotification = (message) => {
+      this.setState({
+        notificationMessage: message
+      })
+      setTimeout(() => {
+        this.setState({notificationMessage: null})
+      }, 5000)
+    }
+
     deletePerson = (person) => {
       if (window.confirm("Haluatko varmasti poistaa henkilön " + person.name + " tiedot?")) {
           personService.deletePerson(person.id).then((response) => {}).then(() => {
           this.setPersons();
+          this.alterNotification(person.name  + " was deleted successfully!");
         })
       }
 
@@ -108,6 +124,7 @@ class Phonebook extends React.Component {
       return (
         <div>
           <h2>Puhelinluettelo</h2>
+          <Notification message = {this.state.notificationMessage}/>
           <InputField
             nameOfField = "rajaa näytettäviä "
             value = {this.state.filter}
