@@ -25,17 +25,6 @@ class Phonebook extends React.Component {
       })
     }
 
-    componentWillMount = () => {
-      this.setPersons();
-    }
-
-    typedNameIsInTheList = () => {
-      const person = this.state.persons.find((person) => {
-        return person.name === this.state.newName
-      })
-       return person;
-    }
-
     addPersonToListAndResetFields = (person) => {
       personService.create(person).then((response) => {
         this.setState({
@@ -47,14 +36,6 @@ class Phonebook extends React.Component {
       this.alterNotification(person.name + " was added to contacts succesfully!");
     }
 
-    findPersonsIndex = (person) => {
-      for (let i = 0; i < this.state.persons.length; i++) {
-        if (person.name === this.state.persons[i].name) {
-          return i;
-        }
-      }
-      return -1;
-    }
 
 
     editPerson = (person) => {
@@ -79,26 +60,6 @@ class Phonebook extends React.Component {
     })
     }
 
-    submitPerson = (e) => {
-        e.preventDefault();
-        const person = this.typedNameIsInTheList();
-        if (person) {
-          this.editPerson(person);
-        }
-        else {
-          const newPerson = {name: this.state.newName, number: this.state.newNumber}
-          this.addPersonToListAndResetFields(newPerson);
-        }
-    }
-
-    alterNotification = (message) => {
-      this.setState({
-        notificationMessage: message
-      })
-      setTimeout(() => {
-        this.setState({notificationMessage: null})
-      }, 5000)
-    }
 
     deletePerson = (person) => {
       if (window.confirm("Haluatko varmasti poistaa henkilön " + person.name + " tiedot?")) {
@@ -108,6 +69,54 @@ class Phonebook extends React.Component {
         })
       }
 
+    }
+
+
+
+    submitPerson = (e) => {
+      e.preventDefault();
+      const person = this.typedNameIsInTheList();
+      if (person) {
+        this.editPerson(person);
+      }
+      else {
+        const newPerson = {name: this.state.newName, number: this.state.newNumber}
+        this.addPersonToListAndResetFields(newPerson);
+      }
+  }
+
+
+
+  typedNameIsInTheList = () => {
+    const person = this.state.persons.find((person) => {
+      return person.name === this.state.newName
+    })
+     return person;
+  }
+
+
+
+  findPersonsIndex = (person) => {
+    for (let i = 0; i < this.state.persons.length; i++) {
+      if (person.name === this.state.persons[i].name) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
+
+    componentWillMount = () => {
+      this.setPersons();
+    }
+
+    alterNotification = (message) => {
+      this.setState({
+        notificationMessage: message
+      })
+      setTimeout(() => {
+        this.setState({notificationMessage: null})
+      }, 5000)
     }
 
     handleNameChange = (e) => {
