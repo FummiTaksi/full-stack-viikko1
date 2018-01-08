@@ -1,5 +1,6 @@
 import React from 'react'
 import Note from './Note'
+import axios from 'axios'
 
 class NoteApp extends React.Component {
 
@@ -14,6 +15,25 @@ class NoteApp extends React.Component {
 
     toggleVisible = () => {
       this.setState({showAll: !this.state.showAll})
+    }
+
+    addNote = (e) => {
+      e.preventDefault()
+      const noteObject = {
+        content: this.state.new_note,
+        date: new Date().new,
+        important: Math.random() > 0.5
+      }
+    
+      axios.post('http://localhost:3001/notes', noteObject)
+        .then(response => {
+          console.log(response)
+        })
+    }
+
+    handleNoteChange = (e) => {
+      console.log(e.target.value)
+      this.setState({ new_note: e.target.value })
     }
   
     render() {
