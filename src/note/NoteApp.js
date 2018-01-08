@@ -32,7 +32,6 @@ class NoteApp extends React.Component {
     }
 
     handleNoteChange = (e) => {
-      console.log(e.target.value)
       this.setState({ new_note: e.target.value })
     }
   
